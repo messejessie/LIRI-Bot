@@ -16,5 +16,10 @@
   "bugs": {
     "url": "https://github.com/messejessie/LIRI-Bot/issues"
   },
-  "homepage": "https://github.com/messejessie/LIRI-Bot#readme"
+  "homepage": "https://github.com/messejessie/LIRI-Bot#readme",
+  "dependencies": {
+    "axios": "^0.18.0",
+    "dotenv": "^6.2.0",
+    "moment": "^2.24.0"
+  }
 }

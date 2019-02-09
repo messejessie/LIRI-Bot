@@ -26,6 +26,7 @@ spotify.search({ type: 'track', query: 'All the Small Things' }, function(err, d
    
   console.log(data); 
   });
+  
 // spotify pending 
 
 //commands

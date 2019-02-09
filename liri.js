@@ -19,7 +19,13 @@ var defaultCmd = 'do-what-it-says';
 // var spotify = new Spotify(keys.spotify);
 
 //spotify function: 
-
+spotify.search({ type: 'track', query: 'All the Small Things' }, function(err, data) {
+    if (err) {
+      return console.log('Error occurred: ' + err);
+    }
+   
+  console.log(data); 
+  });
 // spotify pending 
 
 //commands

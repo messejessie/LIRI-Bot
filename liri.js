@@ -1,5 +1,5 @@
 //requires
-require("dotenv").config();
+
 var fs = require("fs");
 var keys = require("./keys.js");
 var filename = './random.txt';

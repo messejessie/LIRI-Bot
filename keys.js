@@ -1,4 +1,5 @@
 var keys = require("./keys.js");
+require("dotenv").config();
 
 console.log('this is loaded');
 

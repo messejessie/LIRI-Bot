@@ -15,7 +15,8 @@ var movieCmd = 'movie-this';
 var bandCmd = 'concert-this';
 var spotifyCmd = 'spotify-this-song';
 var defaultCmd = 'do-what-it-says';
-
+var ombdURL = `http://www.omdbapi.com/?t=${secondCommand}&y=&plot=short&apikey=2973baab`;
+var bandsURL = `https://rest.bandsintown.com/artists/"${secondCommand}"/events?app_id=codingbootcamp`
 //fetch spotify keys
 //var spotify = new Spotify(keys.spotify);
 
@@ -40,7 +41,7 @@ function getCmd(userCmd) {
             console.log('this is a song');
             break;
         case movieCmd:
-            console.log('this is a movie')
+            console.log('Loading Movie...')
             break;
         case defaultCmd:
             console.log('boring')
@@ -50,7 +51,7 @@ function getCmd(userCmd) {
 
 getCmd(userCmd);
 
-axios.get(`http://www.omdbapi.com/?t=${secondCommand}&y=&plot=short&apikey=2973baab`).then(
+axios.get(ombdURL).then(
     function (response) {
         let movie = response.data;
         // console.log(movie);
@@ -67,3 +68,10 @@ axios.get(`http://www.omdbapi.com/?t=${secondCommand}&y=&plot=short&apikey=2973b
         console.log(movieResponse);
     }
 );
+console.log(bandsURL);
+// axios.get(bandsURL).then(
+//     function(response) {
+//         let band = response.data;
+//         console.log(band);
+//     }
+// )

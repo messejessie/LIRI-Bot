@@ -8,7 +8,7 @@ var filename = './random.txt';
 var spotify = require('node-spotify-api');
 //user arguements 
 var userCmd = process.argv[2]
-var secondCommand = process.argv[3]
+var secondCommand = process.argv.slice(3).join(' ');
 getCmd(userCmd)
 //CMD Keys: 
 var movieCmd = 'movie-this';

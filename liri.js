@@ -2,6 +2,7 @@
 var fs = require("fs");
 var keys = require("./keys.js");
 var axios = require("axios");
+var moment = require("moment");
 require("dotenv").config();
 var filename = './random.txt';
 var spotify = require('node-spotify-api');
@@ -74,19 +75,19 @@ function omdbapi(secondCommand) {
 //console.log(bandsURL);
 function bandsapi(secondCommand) {
     axios.get(bandsURL).then(
-        
+
         function (response) {
-           let bands = response.data;
-           console.log(bands);
+            let bands = response.data;
+            for (let i = 0; i < bands.length; i++) {
+                let bandEvents = bands[i];
+                let concerts = [
+                    'Name of the venue: ' + bandEvents.venue.name,
+                    'Venue location: ' + bandEvents.venue.city + bandEvents.venue.region,
+                    'Date of the Event: ' + moment(bandEvents.venue.datetime).format("MM/DD/YYYY")
+                ]
+                console.log(concerts);
 
-           let bandEvents = [
-
-            'Name of the venue: ' + bands.venue.name,
-            'Venue location: ' + bands.venue,
-            //'Date of the Event' + 
-           ]
-    
-            
+            }
         }
     )
 };

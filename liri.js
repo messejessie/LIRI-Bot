@@ -1,5 +1,4 @@
 //requires
-
 var fs = require("fs");
 var keys = require("./keys.js");
 var axios = require("axios");
@@ -16,7 +15,7 @@ var bandCmd = 'concert-this';
 var spotifyCmd = 'spotify-this-song';
 var defaultCmd = 'do-what-it-says';
 var ombdURL = `http://www.omdbapi.com/?t=${secondCommand}&y=&plot=short&apikey=2973baab`;
-var bandsURL = "https://rest.bandsintown.com/artists/" + secondCommand + "?app_id=codingbootcamp";
+var bandsURL = `https://rest.bandsintown.com/artists/${secondCommand}/events?app_id=codingbootcamp`;
 //fetch spotify keys
 //var spotify = new Spotify(keys.spotify);
 
@@ -53,31 +52,41 @@ function getCmd(userCmd) {
 
 getCmd(userCmd);
 
-function omdbapi(secondCommand){
-axios.get(ombdURL).then(
-    function (response) {
-        let movie = response.data;
-        // console.log(movie);
-        let movieResponse = [
-            'Title:' + movie.Title,
-            'Year: ' + movie.Year,
-            'IMDB Rating: ' + movie.imdbRating,
-            'Rotten Tomatoes: ' + movie.Ratings[1].Value,
-            'Country: ' + movie.Country,
-            'Language: ' + movie.Language,
-            'Plot: ' + movie.Plot,
-            'Actors: ' + movie.Actors,
-        ];
-        console.log(movieResponse);
-    }
-);
+function omdbapi(secondCommand) {
+    axios.get(ombdURL).then(
+        function (response) {
+            let movie = response.data;
+            // console.log(movie);
+            let movieResponse = [
+                'Title:' + movie.Title,
+                'Year: ' + movie.Year,
+                'IMDB Rating: ' + movie.imdbRating,
+                'Rotten Tomatoes: ' + movie.Ratings[1].Value,
+                'Country: ' + movie.Country,
+                'Language: ' + movie.Language,
+                'Plot: ' + movie.Plot,
+                'Actors: ' + movie.Actors,
+            ];
+            console.log(movieResponse);
+        }
+    );
 };
 //console.log(bandsURL);
-function bandsapi(secondCommand){
-axios.get(bandsURL).then(
-    function (response) {
-        let band = response.data;
-        console.log(band);
-    }
-)
+function bandsapi(secondCommand) {
+    axios.get(bandsURL).then(
+        
+        function (response) {
+           let bands = response.data;
+           console.log(bands);
+
+           let bandEvents = [
+
+            'Name of the venue: ' + bands.venue.name,
+            'Venue location: ' + bands.venue,
+            //'Date of the Event' + 
+           ]
+    
+            
+        }
+    )
 };

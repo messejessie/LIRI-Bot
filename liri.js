@@ -53,6 +53,7 @@ function getCmd(userCmd) {
 
 getCmd(userCmd);
 
+//movie-this
 function omdbapi(secondCommand) {
     axios.get(ombdURL).then(
         function (response) {
@@ -72,7 +73,7 @@ function omdbapi(secondCommand) {
         }
     );
 };
-//console.log(bandsURL);
+//Concert - This
 function bandsapi(secondCommand) {
     axios.get(bandsURL).then(
 

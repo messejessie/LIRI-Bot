@@ -1,11 +1,14 @@
+require("dotenv").config();
 //requires
 var fs = require("fs");
 var keys = require("./keys.js");
 var axios = require("axios");
 var moment = require("moment");
-require("dotenv").config();
-var filename = './random.txt';
+//var env = require("./env");
+//var filename = './random.txt';
 var spotify = require('node-spotify-api');
+var spotify = new spotify(keys.spotify);
+
 //user arguements 
 var userCmd = process.argv[2]
 var secondCommand = process.argv.slice(3).join(' ');
@@ -17,19 +20,7 @@ var spotifyCmd = 'spotify-this-song';
 var defaultCmd = 'do-what-it-says';
 var ombdURL = `http://www.omdbapi.com/?t=${secondCommand}&y=&plot=short&apikey=2973baab`;
 var bandsURL = `https://rest.bandsintown.com/artists/${secondCommand}/events?app_id=codingbootcamp`;
-//fetch spotify keys
-//var spotify = new Spotify(keys.spotify);
 
-//spotify function: 
-// spotify.search({ type: 'track', query: 'All the Small Things' }, function(err, data) {
-//     if (err) {
-//       return console.log('Error occurred: ' + err);
-//     }
-
-//   console.log(data); 
-//   });
-
-// spotify pending 
 
 //commands
 function getCmd(userCmd) {
@@ -40,6 +31,7 @@ function getCmd(userCmd) {
             break;
         case spotifyCmd:
             console.log('this is a song');
+            spotifyThis(secondCommand)
             break;
         case movieCmd:
             console.log('Loading Movie...')
@@ -52,6 +44,21 @@ function getCmd(userCmd) {
 };
 
 getCmd(userCmd);
+
+//fetch spotify
+function spotifyThis(secondCommand) {
+   
+spotify
+.search({ type: 'track', query: secondCommand, limit: 1 })
+.then(function(response) {
+    console.log(response.data);
+  })
+  .catch(function(err) {
+    console.log(err);
+  });
+
+}
+
 
 //movie-this
 function omdbapi(secondCommand) {

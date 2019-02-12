@@ -36,14 +36,14 @@ function getCmd(userCmd, secondCommand) {
             bandsapi(secondCommand)
         case spotifyCmd:
             console.log('this is a song');
-            if (secondCommand == '' ){
+            if (secondCommand == '') {
                 secondCommand = defaultSong;
             }
             spotifyThis(secondCommand)
             break;
         case movieCmd:
             console.log('Loading Movie...')
-            if(secondCommand == ''){
+            if (secondCommand == '') {
                 secondCommand = defaultMovie
             }
             omdbapi(secondCommand)

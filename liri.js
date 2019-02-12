@@ -18,8 +18,9 @@ var omdb = keys.omdb.id;
 var movieCmd = 'movie-this';
 var bandCmd = 'concert-this';
 var spotifyCmd = 'spotify-this-song';
-var defaultCmd = 'do-what-it-says';
-
+var doItCmd = 'do-what-it-says';
+var defaultSong = 'The End';
+var defaultMovie = 'Cinderella';
 
 
 
@@ -28,38 +29,61 @@ function getCmd(userCmd, secondCommand) {
     switch (userCmd) {
         case bandCmd:
             console.log('Loading Concerts....')
+            if (secondCommand == '') {
+                console.log('No band Selected');
+                break;
+            }
             bandsapi(secondCommand)
-            break;
         case spotifyCmd:
             console.log('this is a song');
+            if (secondCommand == '' ){
+                secondCommand = defaultSong;
+            }
             spotifyThis(secondCommand)
             break;
         case movieCmd:
             console.log('Loading Movie...')
+            if(secondCommand == ''){
+                secondCommand = defaultMovie
+            }
             omdbapi(secondCommand)
             break;
-        case defaultCmd:
-            console.log('boring')
+        case doItCmd:
+            console.log('You clearly do not know what you want')
+            justDoIt()
             break;
     }
 };
 
 // getCmd(userCmd);
+//do-it 
+function justDoIt() {
+    fs.readFile("random.txt", "utf8", function (err, data) {
+        // console.log(data);
+        let info = data.split(",");
+        userCmd = info[0];
+        secondCommand = info[1];
+        console.log(info);
+        console.log(userCmd);
+        console.log(secondCommand);
+        processCmd(userCmd, secondCommand);
+    });
+}
 
 //fetch spotify
 function spotifyThis(secondCommand) {
-    let query = secondCommand != "" ? secondCommand : "The end";
     spotify
-        .search({ type: 'track', query: query, limit: 1 })
+        .search({ type: 'track', query: secondCommand, limit: 1 })
         .then(function (response) {
-            let song = response.tracks.items;
-            console.log(song)
-            // let songResponse = [
-            //     'Artist: ' + song.album.artists[0].name,
-            //     'Song Name: ' + song.album.name,
-            //     'Song Preview: ' + song.ablum.spotify,
-            // ]
-            // console.log(songResponse)
+            let song = response.tracks.items[0];
+            //console.log(song)
+            let songResponse = [
+                'Artist: ' + song.album.artists[0].name,
+                'Song Name: ' + song.name,
+                'Song Preview: ' + song.preview_url,
+                'Album: ' + song.album.name
+            ]
+            console.log(songResponse)
         })
         .catch(function (err) {
             console.log(err);
@@ -86,18 +110,18 @@ function omdbapi(secondCommand) {
                 'Plot: ' + movie.Plot,
                 'Actors: ' + movie.Actors,
             ];
-             console.log(movieResponse);
+            console.log(movieResponse);
         }
     );
 };
 //Concert - This
 function bandsapi(secondCommand) {
     var bandsURL = `https://rest.bandsintown.com/artists/${secondCommand}/events?app_id=codingbootcamp`;
-   // console.log(bandsURL)
+    // console.log(bandsURL)
     axios.get(bandsURL).then(
         function (response) {
             let bands = response.data;
-          //  console.log(bands)
+            //  console.log(bands)
             for (let i = 0; i < bands.length; i++) {
                 let bandEvents = bands[i];
                 let concerts = [

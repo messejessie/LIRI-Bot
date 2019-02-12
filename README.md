@@ -19,3 +19,4 @@
 
 ** hit enter and get the information returned 
 
+** tech used moment, axios, js, and inquirer.

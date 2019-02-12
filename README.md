@@ -2,12 +2,20 @@
 
 ** run node Liri 
 
-** select and option
+** select an option
+    *** Concert-this
+    *** Spotify this song
+    *** movie-this 
 
-** add artist song or movie 
+** hit enter
 
-** selecte yes to make it true and it will pull the informatoin regarding what you requested. 
-![Optional Text](../Liri-start.png)
-![Optional Text](../Liri-list.png)
-![Optional Text](../Liri-answer.png)
+** For concert-this enter Artist or band
+** For Spotify-this-song pick a song
+** For movie-this pick a movie 
+
+** hit enter
+
+**then enter y for yes or for no
+
+** hit enter and get the information returned 
 

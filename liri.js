@@ -47,15 +47,15 @@ getCmd(userCmd);
 
 //fetch spotify
 function spotifyThis(secondCommand) {
-   
-spotify
-.search({ type: 'track', query: secondCommand, limit: 1 })
-.then(function(response) {
-    console.log(response.data);
-  })
-  .catch(function(err) {
-    console.log(err);
-  });
+    let query = secondCommand != "" ? secondCommand : "The end";
+    spotify
+        .search({ type: 'track', query: query, limit: 1 })
+        .then(function (response) {
+            console.log(response.tracks.items);
+        })
+        .catch(function (err) {
+            console.log(err);
+        });
 
 }
 
